@@ -3,6 +3,11 @@ name = "tuah"
 version = "0.1.0"
 edition = "2021"
 
+[workspace]
+members = [
+    "server"
+]
+
 [dependencies]
 anyhow = "1.0.96"
 eframe = "0.31.0"
@@ -10,4 +15,6 @@ scrap = "0.5.0"
 serde = { version = "1.0.218", features = ["derive"] }
 serde_json = "1.0.139"
 tokio = { version = "1", features = ["full"] }
+tracing = "0.1.41"
+tracing-subscriber = "0.3.19"
 webrtc = "0.12.0"

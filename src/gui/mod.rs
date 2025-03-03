@@ -30,23 +30,38 @@ impl eframe::App for TuahApp {
                     AppState::MainMenu => {
                         ui.heading("📡 Select an action");
                         ui.add_space(10.0);
-                        if ui.add_sized([200.0, 40.0], egui::Button::new("🚀 Start the broadcast")).clicked() {
+                        if ui
+                            .add_sized([200.0, 40.0], egui::Button::new("🚀 Create room"))
+                            .clicked()
+                        {
                             self.state = AppState::Hosting;
                         }
                         ui.add_space(10.0);
-                        if ui.add_sized([200.0, 40.0], egui::Button::new("🔗 Join to the broadcast")).clicked() {
+                        if ui
+                            .add_sized([200.0, 40.0], egui::Button::new("🔗 Join to the room"))
+                            .clicked()
+                        {
                             self.state = AppState::Joining;
                         }
-                    },
+                    }
                     AppState::Hosting => {
                         ui.heading("🎥 Broadcasting is not implemented yet :(");
                         ui.add_space(10.0);
-                        ui.label(egui::RichText::new(format!("🔑 Connection code: {}", self.connection_code)).size(18.0));
+                        ui.label(
+                            egui::RichText::new(format!(
+                                "🔑 Connection code: {}",
+                                self.connection_code
+                            ))
+                            .size(18.0),
+                        );
                         ui.add_space(10.0);
-                        if ui.add_sized([200.0, 40.0], egui::Button::new("⏹ Stop the broadcast")).clicked() {
+                        if ui
+                            .add_sized([200.0, 40.0], egui::Button::new("⏹ Leave room"))
+                            .clicked()
+                        {
                             self.state = AppState::MainMenu;
                         }
-                    },
+                    }
                     AppState::Joining => {
                         ui.heading("🔗 Join to the broadcast");
                         ui.add_space(10.0);
@@ -54,13 +69,22 @@ impl eframe::App for TuahApp {
                         ui.add(egui::TextEdit::singleline(&mut self.username).desired_width(500.0));
                         ui.add_space(10.0);
                         ui.label("🔑 Enter connection code:");
-                        ui.add(egui::TextEdit::singleline(&mut self.connection_code).desired_width(500.0));
+                        ui.add(
+                            egui::TextEdit::singleline(&mut self.connection_code)
+                                .desired_width(500.0),
+                        );
                         ui.add_space(10.0);
-                        if ui.add_sized([200.0, 40.0], egui::Button::new("🔗 Connect")).clicked() {
+                        if ui
+                            .add_sized([200.0, 40.0], egui::Button::new("🔗 Connect"))
+                            .clicked()
+                        {
                             //todo!();
                         }
                         ui.add_space(10.0);
-                        if ui.add_sized([200.0, 40.0], egui::Button::new("↩ Back to the menu")).clicked() {
+                        if ui
+                            .add_sized([200.0, 40.0], egui::Button::new("↩ Back to the menu"))
+                            .clicked()
+                        {
                             self.state = AppState::MainMenu;
                         }
                     }

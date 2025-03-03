@@ -1,12 +1,10 @@
-mod app;
-mod connection;
 mod capture;
+mod gui;
 mod signaling;
 mod utils;
 
 use eframe::egui;
-use app::TuahApp;
-
+use gui::TuahApp;
 
 fn main() -> eframe::Result {
     let options = eframe::NativeOptions {
