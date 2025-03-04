@@ -9,6 +9,7 @@ use tracing::info;
 mod chat;
 mod config;
 mod handlers;
+mod error;
 mod webrtc;
 
 async fn run() {
