@@ -1,6 +1,10 @@
 use std::fmt;
 
-use axum::http::StatusCode;
+use axum::{
+    Json,
+    http::StatusCode,
+    response::{IntoResponse, Response},
+};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -23,7 +27,7 @@ pub enum ErrorMessage {
 
 impl ToString for ErrorMessage {
     fn to_string(&self) -> String {
-        self.to_string().to_owned()
+        self.to_str().to_owned()
     }
 }
 
@@ -36,13 +40,14 @@ impl ErrorMessage {
     }
 }
 
+#[derive(Debug, Clone)]
 pub struct HttpError {
     pub message: String,
     pub status: StatusCode,
 }
 
 impl HttpError {
-    pub fn new(message: impl Into<String>, status: StatusCode) -> self {
+    pub fn new(message: impl Into<String>, status: StatusCode) -> Self {
         HttpError {
             message: message.into(),
             status,
@@ -54,5 +59,39 @@ impl HttpError {
             message: message.into(),
             status: StatusCode::INTERNAL_SERVER_ERROR,
         }
+    }
+
+    pub fn bad_request(message: impl Into<String>) -> Self {
+        HttpError {
+            message: message.into(),
+            status: StatusCode::CONFLICT,
+        }
+    }
+
+    pub fn into_http_response(self) -> Response {
+        let json_response = Json(ErrorResonse {
+            status: "fail".to_string(),
+            message: self.message.clone(),
+        });
+
+        (self.status, json_response).into_response()
+    }
+}
+
+impl fmt::Display for HttpError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "HttpError: message: {}, status: {}",
+            self.message, self.status,
+        )
+    }
+}
+
+impl std::error::Error for HttpError {}
+
+impl IntoResponse for HttpError {
+    fn into_response(self) -> Response {
+        self.into_http_response()
     }
 }
