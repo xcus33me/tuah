@@ -11,6 +11,12 @@ mod config;
 mod handlers;
 mod error;
 mod webrtc;
+mod room;
+
+#[derive(Debug, Clone)]
+pub struct AppState {
+
+}
 
 async fn run() {
     tracing_subscriber::fmt()
@@ -21,7 +27,7 @@ async fn run() {
 
     let app = Router::new()
         .nest("/room", room_handler())
-        .nest("/stream", stream_handler())
+        .nest("/stream", stream_handler());
 
 
     let addr: SocketAddr = config.addr.parse().expect("Invalid address format");
