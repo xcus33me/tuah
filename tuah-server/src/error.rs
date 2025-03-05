@@ -8,12 +8,12 @@ use axum::{
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct ErrorResonse {
+pub struct ErrorResponse {
     pub status: String,
     pub message: String,
 }
 
-impl fmt::Display for ErrorResonse {
+impl fmt::Display for ErrorResponse {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "Error: {}", serde_json::to_string(&self).unwrap())
     }
@@ -69,7 +69,7 @@ impl HttpError {
     }
 
     pub fn into_http_response(self) -> Response {
-        let json_response = Json(ErrorResonse {
+        let json_response = Json(ErrorResponse {
             status: "fail".to_string(),
             message: self.message.clone(),
         });
