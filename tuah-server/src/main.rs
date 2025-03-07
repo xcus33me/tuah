@@ -1,10 +1,11 @@
 use std::{collections::HashMap, net::SocketAddr, sync::Arc};
 
-use axum::{extract::ws, Extension, Router};
-use config::{Config, fetch_config};
+use axum::{Extension, Router};
+use config::fetch_config;
 use futures::lock::Mutex;
 use handlers::{room::room_handler, stream::stream_handler};
-use room::RoomState;
+use room::Room;
+use tower_http::trace::TraceLayer;
 use tracing::info;
 
 mod chat;
@@ -13,10 +14,11 @@ mod handlers;
 mod error;
 mod webrtc;
 mod room;
+mod routes;
 
 #[derive(Debug, Clone)]
 pub struct AppState {
-    rooms: Arc<Mutex<HashMap<String, RoomState>>>,
+    rooms: Arc<Mutex<HashMap<String, Room>>>,
 }
 
 impl Default for AppState {
@@ -39,6 +41,7 @@ async fn run() {
     let app = Router::new()
         .nest("/room", room_handler())
         .nest("/stream", stream_handler())
+        .layer(TraceLayer::new_for_http())
         .layer(Extension(app_state));
 
 

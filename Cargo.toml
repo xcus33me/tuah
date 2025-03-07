@@ -3,3 +3,4 @@ members = [
     "tuah-desktop",
     "tuah-server",
 ]
+workspace.resolver = "1"

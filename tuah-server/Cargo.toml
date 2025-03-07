@@ -1,12 +1,10 @@
 [package]
-name = "server"
+name = "tuah-server"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 [dependencies]
-anyhow = "1.0.96"
 axum = { version = "0.8.1", features = ["ws"] }
-clap = { version = "4.5.31", features = ["derive"] }
 dotenv = "0.15.0"
 serde = "1.0.218"
 serde_derive = "1.0.218"
@@ -18,3 +16,7 @@ tracing-subscriber = "0.3.19"
 uuid = { version = "1.15.1", features = ["v4"] }
 webrtc = "0.12.0"
 futures = "0.3.31"
+tower-http = { version = "0.6.2", features = ["cors", "trace"] }
+redis = { version = "0.29.1", features = ["tokio-comp"] }
+anyhow = "1.0.97"
+clap = { version = "4.5.31", features = ["derive"] }

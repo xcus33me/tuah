@@ -1,16 +1,20 @@
 use std::sync::Arc;
 
+use uuid::Uuid;
+
 use crate::chat;
 
 #[derive(Debug, Clone)]
-pub struct RoomState {
-    participants: usize,
-    chat_hub: Arc<chat::hub::Hub>,
+pub struct Room {
+    pub id: Uuid,
+    pub participants: usize,
+    pub chat_hub: Arc<chat::hub::Hub>,
 }
 
-impl RoomState {
+impl Room {
     pub fn new() -> Self {
-        RoomState {
+        Room {
+            id: Uuid::new_v4(),
             participants: 0,
             chat_hub: chat::hub::Hub::new(),
         }
