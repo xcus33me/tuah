@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use uuid::Uuid;
 
-use crate::chat;
+use super::chat;
 
 #[derive(Debug, Clone)]
 pub struct Room {
