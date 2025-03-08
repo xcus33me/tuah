@@ -1,6 +1,12 @@
-use axum::{routing::get, Router};
+use axum::{
+    routing::get,
+    Router,
+};
 
-use crate::handlers::stream::{get_stream, get_stream_ws};
+use crate::handlers::stream::{
+    get_stream,
+    get_stream_ws,
+};
 
 pub fn stream_route() -> Router {
     Router::new()

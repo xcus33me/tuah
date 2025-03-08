@@ -1,6 +1,8 @@
 use anyhow::Result;
-use serde::{Deserialize, Serialize};
-
+use serde::{
+    Deserialize,
+    Serialize,
+};
 
 #[derive(Serialize, Deserialize, Debug)]
 struct SignalingMessage {

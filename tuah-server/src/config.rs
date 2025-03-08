@@ -1,6 +1,9 @@
 use std::env;
 
-use anyhow::{Ok, Result};
+use anyhow::{
+    Ok,
+    Result,
+};
 use clap::Parser;
 
 #[derive(Parser, Debug)]

@@ -3,7 +3,10 @@ mod stream;
 
 use std::sync::Arc;
 
-use axum::{Extension, Router};
+use axum::{
+    Extension,
+    Router,
+};
 use room::room_route;
 use stream::stream_route;
 use tower_http::trace::TraceLayer;

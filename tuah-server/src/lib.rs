@@ -1,17 +1,24 @@
-use std::{collections::HashMap, net::SocketAddr, sync::{Arc, Mutex}};
+use std::{
+    collections::HashMap,
+    net::SocketAddr,
+    sync::{
+        Arc,
+        Mutex,
+    },
+};
 
-use axum::{Router};
+use axum::Router;
 use config::fetch_config;
 use routes::create_router;
-use types::room::Room;
 use tracing::info;
+use types::room::Room;
 
 mod config;
+mod error;
 mod handlers;
 mod routes;
 mod services;
 mod types;
-mod error;
 
 #[derive(Debug, Clone)]
 pub struct AppState {
@@ -37,13 +44,10 @@ pub async fn run() {
     let app = create_router(app_state);
 
     let addr: SocketAddr = config.addr.parse().expect("Invalid address format");
-    
+
     info!("Running at https://{}", addr);
-    
-    let listener = tokio::net::TcpListener::bind(addr)
-        .await
-        .unwrap();
+
+    let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
 
     axum::serve(listener, app).await.unwrap();
-
 }

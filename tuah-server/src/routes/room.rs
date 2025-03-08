@@ -1,6 +1,19 @@
-use axum::{routing::{get, post}, Router};
+use axum::{
+    routing::{
+        get,
+        post,
+    },
+    Router,
+};
 
-use crate::handlers::room::{create_room, get_room, get_room_chat, get_room_chat_ws, get_room_viewer_ws, get_room_ws};
+use crate::handlers::room::{
+    create_room,
+    get_room,
+    get_room_chat,
+    get_room_chat_ws,
+    get_room_viewer_ws,
+    get_room_ws,
+};
 
 pub fn room_route() -> Router {
     Router::new()

@@ -1,4 +1,11 @@
-use std::{collections::HashMap, io::Read, sync::{Arc, Mutex}};
+use std::{
+    collections::HashMap,
+    io::Read,
+    sync::{
+        Arc,
+        Mutex,
+    },
+};
 
 use futures::channel::mpsc::UnboundedSender;
 
@@ -20,7 +27,11 @@ impl Hub {
         })
     }
 
-    pub fn add_client(self: Arc<Self>, client_id: String, sender: UnboundedSender<Message>) {
+    pub fn add_client(
+        self: Arc<Self>,
+        client_id: String,
+        sender: UnboundedSender<Message>,
+    ) {
         let mut clients = self.clients.lock().unwrap();
         clients.insert(client_id, sender);
     }

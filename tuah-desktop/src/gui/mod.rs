@@ -1,4 +1,7 @@
-use eframe::{egui, App};
+use eframe::{
+    egui,
+    App,
+};
 
 pub struct TuahApp {
     state: AppState,
@@ -38,7 +41,10 @@ impl eframe::App for TuahApp {
                         }
                         ui.add_space(10.0);
                         if ui
-                            .add_sized([200.0, 40.0], egui::Button::new("🔗 Join to the room"))
+                            .add_sized(
+                                [200.0, 40.0],
+                                egui::Button::new("🔗 Join to the room"),
+                            )
                             .clicked()
                         {
                             self.state = AppState::Joining;
@@ -66,7 +72,10 @@ impl eframe::App for TuahApp {
                         ui.heading("🔗 Join to the broadcast");
                         ui.add_space(10.0);
                         ui.label("👤 Enter your name:");
-                        ui.add(egui::TextEdit::singleline(&mut self.username).desired_width(500.0));
+                        ui.add(
+                            egui::TextEdit::singleline(&mut self.username)
+                                .desired_width(500.0),
+                        );
                         ui.add_space(10.0);
                         ui.label("🔑 Enter connection code:");
                         ui.add(
@@ -82,7 +91,10 @@ impl eframe::App for TuahApp {
                         }
                         ui.add_space(10.0);
                         if ui
-                            .add_sized([200.0, 40.0], egui::Button::new("↩ Back to the menu"))
+                            .add_sized(
+                                [200.0, 40.0],
+                                egui::Button::new("↩ Back to the menu"),
+                            )
                             .clicked()
                         {
                             self.state = AppState::MainMenu;

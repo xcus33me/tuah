@@ -1,7 +1,13 @@
 use anyhow::Result;
-use scrap::{Capturer, Display};
+use scrap::{
+    Capturer,
+    Display,
+};
+use std::{
+    io::ErrorKind::WouldBlock,
+    time::Duration,
+};
 use webrtc::peer_connection::RTCPeerConnection;
-use std::{io::ErrorKind::WouldBlock, time::Duration};
 
 pub struct ScreenCapture {
     capturer: Capturer,
@@ -31,4 +37,3 @@ impl ScreenCapture {
         }
     }
 }
-

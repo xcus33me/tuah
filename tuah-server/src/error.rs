@@ -1,11 +1,17 @@
 use std::fmt;
 
 use axum::{
-    Json,
     http::StatusCode,
-    response::{IntoResponse, Response},
+    response::{
+        IntoResponse,
+        Response,
+    },
+    Json,
 };
-use serde::{Deserialize, Serialize};
+use serde::{
+    Deserialize,
+    Serialize,
+};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ErrorResponse {
@@ -34,7 +40,9 @@ impl ToString for ErrorMessage {
 impl ErrorMessage {
     fn to_str(&self) -> String {
         match self {
-            ErrorMessage::ServerError => "Server error. Please try again later".to_string(),
+            ErrorMessage::ServerError => {
+                "Server error. Please try again later".to_string()
+            }
             ErrorMessage::HashingError => "Error while hashing".to_string(),
         }
     }
