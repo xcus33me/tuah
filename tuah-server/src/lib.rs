@@ -2,7 +2,7 @@ use std::{collections::HashMap, net::SocketAddr, sync::{Arc, Mutex}};
 
 use axum::{Router};
 use config::fetch_config;
-use routes::create_router;
+use routes::create_app_router;
 use types::room::Room;
 use tracing::info;
 
@@ -34,7 +34,7 @@ pub async fn run() {
     let config = fetch_config().expect("Failed to fetch configuration");
     let app_state = Arc::new(AppState::default());
 
-    let app = create_router(app_state);
+    let app = create_app_router(app_state);
 
     let addr: SocketAddr = config.addr.parse().expect("Invalid address format");
     
@@ -45,5 +45,4 @@ pub async fn run() {
         .unwrap();
 
     axum::serve(listener, app).await.unwrap();
-
 }
