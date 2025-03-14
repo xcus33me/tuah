@@ -1,10 +1,10 @@
 use std::sync::Arc;
 
+use sea_orm::entity::prelude::*;
 use uuid::Uuid;
 
 use super::chat;
 
-#[derive(Debug, Clone)]
 pub struct Room {
     pub id: Uuid,
     pub participants: usize,

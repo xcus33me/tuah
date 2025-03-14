@@ -20,3 +20,4 @@ tower-http = { version = "0.6.2", features = ["cors", "trace"] }
 redis = { version = "0.29.1", features = ["tokio-comp"] }
 anyhow = "1.0.97"
 clap = { version = "4.5.31", features = ["derive"] }
+sea-orm = "1.1.7"

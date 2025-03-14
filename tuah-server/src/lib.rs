@@ -12,6 +12,7 @@ mod routes;
 mod services;
 mod types;
 mod error;
+mod entities;
 
 #[derive(Debug, Clone)]
 pub struct AppState {
